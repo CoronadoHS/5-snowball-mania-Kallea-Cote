@@ -1,7 +1,7 @@
 ''' 
     Name: Snowball-Mania
-    Author: 
-    Date: 
+    Author: Kallea Cote
+    Date: 12/5/25
     Class: AP Computer Science Principles
     Python: 
 '''
@@ -37,6 +37,17 @@ def getNames():
     ' Return: the list of player names
     ' 
     '''
+    players = []
+    thisname = input("What is your name?   ")
+    players.append(thisname)
+    print("Who do you want to play in a snowball fight (one at a time)? Type done when you are finished!   ")
+    fname1= input()
+    while (fname1 != "done"):
+        players.append(fname1)
+        fname1 = input()
+    print("Time to Play!!!")
+    return players
+    
 
 
 def getThrower(players):
@@ -47,6 +58,7 @@ def getThrower(players):
     '
     ' Return: player name
     '''
+    return random.choice(players)
 
     
 def getVictim(players, t):
@@ -59,6 +71,10 @@ def getVictim(players, t):
     '
     ' Return: victim's name
     '''
+    v = random.choice(players)
+    while v == t:
+        v = random.choice(players)
+    return v 
 
 
 def getHitResult():
@@ -71,6 +87,11 @@ def getHitResult():
     '
     ' Return: Boolean representing whether or not the snowball hit
     '''
+    hit_Num = random.randint(1,10)
+    if (hit_Num % 2 == 1):
+        return True
+    else:
+        return False
     
 
 def playSnowballFight(players):
@@ -89,6 +110,21 @@ def playSnowballFight(players):
     ' 
     ' Return: none
     '''
+    while (len(players) >= 2):
+        thrower = getThrower(players)
+        victim = getVictim(players, thrower)
+        hitresult = getHitResult()
+        if (hitresult == True):
+            koresult = random.randint(1, 2)
+            if koresult == 1:
+                print(thrower + " nailed "+ victim + " - knockout!!! ")
+                players.remove(victim)
+            else:
+                print(thrower + " throws and hits " + victim + " but they survives to fight another day! ")
+        else:
+            print (thrower + " throws at " + victim + " but missed! " )
+        time.sleep(3)
+
 
     
 def printOutro(winner):
@@ -115,3 +151,10 @@ def runProgram():
     '
     ' Return: none
     '''
+    printIntro()
+    playernames = getNames()
+    playSnowballFight(playernames)
+    printOutro(playernames[0])
+
+
+runProgram()
