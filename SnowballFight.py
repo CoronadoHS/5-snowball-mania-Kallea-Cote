@@ -9,6 +9,12 @@
 import random
 import time
 
+from colorama import init, Fore, Back, Style
+
+init()
+
+print("Hello " + Fore.RED + "World!" + Style.RESET_ALL)
+# print(Style.RESET_ALL)
 
 def printIntro():
     '''
