@@ -51,7 +51,7 @@ def getNames():
     while (fname1 != "done"):
         players.append(fname1)
         fname1 = input()
-    print("Time to Play!!!")
+    print(Fore.WHITE + "Time to Play!!!" + Style.RESET_ALL)
     return players
     
 
@@ -120,15 +120,26 @@ def playSnowballFight(players):
         thrower = getThrower(players)
         victim = getVictim(players, thrower)
         hitresult = getHitResult()
+
+        survives1 = thrower + " throws at " + victim + Fore.YELLOW + ", but missed! " + Style.RESET_ALL
+        survives2 = thrower + "tries to hit " + victim + "...and does! But the snowball bounces off and " + Fore.YELLOW + "it misses " + thrower + Style.RESET_ALL
+        SuriveMessages = [survives1, survives2]
+
+        Knockout1 = thrower + " nailed" + victim + Fore.RED + " - Knockout!!!"
+        Knockout2 = thrower + "tries to hit " + victim + "... does! But the snowball bounces off and hits " + thrower + Fore.RED + " causing them to knockout" + Style.RESET_ALL
+
         if (hitresult == True):
             koresult = random.randint(1, 2)
             if koresult == 1:
-                print(thrower + " nailed "+ victim + " - knockout!!! ")
-                players.remove(victim)
+                print(random.choice(Knockoutmessages))
+                if (random.choice == Knockout1):
+                         players.remove(victim)
+                else:
+                     players.remove(thrower)
             else:
-                print(thrower + " throws and hits " + victim + " but they survives to fight another day! ")
+                print(Fore.LIGHTBLUE_EX + thrower + " throws and hits " + victim + " but they survive to fight another day!" + Style.RESET_ALL)
         else:
-            print (thrower + " throws at " + victim + " but missed! " )
+            print (random.choice(SuriveMessages))
         time.sleep(3)
 
 
